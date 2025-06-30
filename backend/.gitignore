@@ -1,0 +1,47 @@
+# Build results
+bin/
+obj/
+Debug/
+Release/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# NuGet
+packages/
+*.nupkg
+project.lock.json
+
+# Environment files
+.env
+appsettings.Development.json
+
+# Logs
+*.log
+logs/
+
+# Database
+*.db
+*.sqlite
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test results
+TestResults/
+coverage/
+
+# Temporary files
+*.tmp
+*.cache
+*~
+
+# JetBrains Rider
+*.sln.iml
