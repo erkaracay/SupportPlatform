@@ -70,4 +70,32 @@ public class TicketService : ITicketService
         dto.CreatedAt = ticket.CreatedAt;
         return dto;
     }
+
+    public async Task<TicketDto> UpdateTicketAsync(TicketDto dto)
+    {
+        var ticket = await _context.Tickets.FindAsync(dto.Id);
+        if (ticket == null)
+            throw new Exception("Ticket not found");
+
+        ticket.Title = dto.Title;
+        ticket.Description = dto.Description;
+        ticket.Priority = Enum.Parse<TicketPriority>(dto.Priority);
+        ticket.Status = Enum.Parse<TicketStatus>(dto.Status);
+        ticket.CompanyId = dto.CompanyId;
+        ticket.CreatedByUserId = dto.CreatedByUserId;
+
+        await _context.SaveChangesAsync();
+        return dto;
+    }
+
+    public async Task<bool> DeleteTicketAsync(Guid id)
+    {
+        var ticket = await _context.Tickets.FindAsync(id);
+        if (ticket == null)
+            return false;
+
+        _context.Tickets.Remove(ticket);
+        await _context.SaveChangesAsync();
+        return true;
+    }
 }

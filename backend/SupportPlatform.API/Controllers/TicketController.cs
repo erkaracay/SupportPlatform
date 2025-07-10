@@ -40,4 +40,27 @@ public class TicketController : ControllerBase
         var createdTicket = await _ticketService.CreateTicketAsync(ticketDto);
         return CreatedAtAction(nameof(GetById), new { id = createdTicket.Id }, createdTicket);
     }
+
+    // PUT: /api/ticket/{id}
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(Guid id, [FromBody] TicketDto dto)
+    {
+        var existing = await _ticketService.GetTicketByIdAsync(id);
+        if (existing == null)
+            return NotFound();
+
+        dto.Id = id;
+        var updated = await _ticketService.UpdateTicketAsync(dto);
+        return Ok(updated);
+    }
+
+    // DELETE: /api/ticket/{id}
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var success = await _ticketService.DeleteTicketAsync(id);
+        if (!success)
+            return NotFound();
+        return NoContent();
+    }
 }
