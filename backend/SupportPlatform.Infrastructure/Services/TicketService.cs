@@ -1,10 +1,10 @@
+using Microsoft.EntityFrameworkCore;
 using SupportPlatform.Application.DTOs;
 using SupportPlatform.Application.Interfaces;
 using SupportPlatform.Domain.Entities;
 using SupportPlatform.Infrastructure.Persistence;
-using Microsoft.EntityFrameworkCore;
 
-namespace SupportPlatform.Application.Services;
+namespace SupportPlatform.Infrastructure.Services;
 
 public class TicketService : ITicketService
 {
@@ -17,8 +17,8 @@ public class TicketService : ITicketService
 
     public async Task<List<TicketDto>> GetAllTicketsAsync()
     {
-        return await _context.Tickets
-            .Select(t => new TicketDto
+        return await _context
+            .Tickets.Select(t => new TicketDto
             {
                 Id = t.Id,
                 Title = t.Title,
@@ -27,7 +27,7 @@ public class TicketService : ITicketService
                 Status = t.Status.ToString(),
                 Priority = t.Priority.ToString(),
                 CompanyId = t.CompanyId,
-                CreatedByUserId = t.CreatedByUserId
+                CreatedByUserId = t.CreatedByUserId,
             })
             .ToListAsync();
     }
@@ -35,7 +35,8 @@ public class TicketService : ITicketService
     public async Task<TicketDto?> GetTicketByIdAsync(Guid id)
     {
         var ticket = await _context.Tickets.FindAsync(id);
-        if (ticket == null) return null;
+        if (ticket == null)
+            return null;
 
         return new TicketDto
         {
@@ -46,7 +47,7 @@ public class TicketService : ITicketService
             Status = ticket.Status.ToString(),
             Priority = ticket.Priority.ToString(),
             CompanyId = ticket.CompanyId,
-            CreatedByUserId = ticket.CreatedByUserId
+            CreatedByUserId = ticket.CreatedByUserId,
         };
     }
 
@@ -59,7 +60,7 @@ public class TicketService : ITicketService
             Priority = Enum.Parse<TicketPriority>(dto.Priority),
             Status = Enum.Parse<TicketStatus>(dto.Status),
             CompanyId = dto.CompanyId,
-            CreatedByUserId = dto.CreatedByUserId
+            CreatedByUserId = dto.CreatedByUserId,
         };
 
         _context.Tickets.Add(ticket);
