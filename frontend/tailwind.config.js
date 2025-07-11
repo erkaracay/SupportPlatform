@@ -1,21 +1,20 @@
 module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{vue,js,ts,jsx,tsx}",
+    './index.html',
+    './src/**/*.{vue,js,ts,jsx,tsx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        primary: '#4F46E5',       // indigo-600
-        primaryLight: '#E0E7FF',  // indigo-100
-        danger: '#F43F5E',        // rose-500
-        warning: '#F59E0B',       // amber-500
-        success: '#10B981',       // emerald-500
-        info: '#3B82F6',          // blue-500
-        dark: '#1F2937',          // gray-800
-        light: '#F9FAFB'          // gray-50
+        primary: '#F59E0B',       // amber-500
+        primaryLight: '#FEF3C7',  // amber-100
+        text: '#18181B',          // zinc-900
+        surface: '#F1F5F9',       // zinc-100
+        darkBg: '#18181B',        // dark mode background
+        darkText: '#E5E7EB'       // text for dark mode
       }
-    },
+    }
   },
-  plugins: [],
+  plugins: []
 }

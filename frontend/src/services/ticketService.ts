@@ -2,7 +2,7 @@ import axios from 'axios'
 import { TicketDto } from '@/types/TicketDto'
 
 const api = axios.create({
-  baseURL: 'https://localhost:5297/api',
+  baseURL: 'http://localhost:5297/api',
 })
 
 export const getTickets = () => api.get<TicketDto[]>('/ticket')
