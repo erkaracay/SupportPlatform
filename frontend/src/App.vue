@@ -1,10 +1,22 @@
-<script setup>
-</script>
-
+<!-- src/App.vue -->
 <template>
-  <div class="flex justify-center items-center h-screen">
-    <h1 class="text-4xl font-bold text-blue-600">Welcome to Support Platform</h1>
-  </div>
+  <component :is="layout">
+    <RouterView v-slot="{ Component }">
+      <component :is="Component" />
+    </RouterView>
+  </component>
 </template>
 
-<style scoped></style>
+<script setup lang="ts">
+import { ref, watchEffect } from 'vue'
+import { useRoute } from 'vue-router'
+import DefaultLayout from '@/layouts/DefaultLayout.vue'
+
+const route = useRoute()
+const layout = ref(DefaultLayout)
+
+watchEffect(() => {
+  const matchedComponent = route.matched.at(-1)?.components?.default as any
+  layout.value = matchedComponent?.layout || DefaultLayout
+})
+</script>
