@@ -4,14 +4,14 @@ public enum TicketStatus
 {
     Open,
     InProgress,
-    Closed
+    Closed,
 }
 
 public enum TicketPriority
 {
     Low,
     Medium,
-    High
+    High,
 }
 
 public class Ticket
